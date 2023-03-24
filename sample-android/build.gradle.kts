@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "io.polyakov.sample.android"
+    namespace = "io.polyakov.tracy.sample.android"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "io.polyakov.sample.android"
+        applicationId = "io.polyakov.tracy.sample.android"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

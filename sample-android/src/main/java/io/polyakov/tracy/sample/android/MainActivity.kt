@@ -1,4 +1,4 @@
-package io.polyakov.sample.android
+package io.polyakov.tracy.sample.android
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
