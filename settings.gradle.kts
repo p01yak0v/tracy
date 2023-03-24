@@ -7,6 +7,17 @@ pluginManagement {
     }
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+        google()
+    }
+
+    dependencies {
+        classpath("com.google.gms:google-services:4.3.15")
+    }
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 

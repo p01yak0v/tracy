@@ -1,6 +1,7 @@
 package io.polyakov.tracy
 
 import io.polyakov.tracy.destination.LoggingDestination
+import io.polyakov.tracy.destination.TraceDestination
 import io.polyakov.tracy.dispatcher.DestinationTraceStateDelegate
 import io.polyakov.tracy.dispatcher.TraceDispatcherImpl
 import io.polyakov.tracy.model.Checkpoint
@@ -14,17 +15,12 @@ interface Tracy {
 
         private lateinit var tracy: Tracy
 
-        fun init(provider: TraceDescriptorProvider) {
+        fun init(provider: TraceDescriptorProvider, destinations: List<TraceDestination>) {
             tracy = TracyImpl(
                 traceDescriptorProvider = provider,
                 traceRegistry = TraceRegistryImpl(),
                 traceDispatcher = TraceDispatcherImpl(
-                    DestinationTraceStateDelegate(
-                        listOf(
-                            LoggingDestination("FirstDestination"),
-                            LoggingDestination("SecondDestination")
-                        )
-                    )
+                    DestinationTraceStateDelegate(destinations)
                 )
             )
         }

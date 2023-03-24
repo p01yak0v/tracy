@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -34,8 +35,12 @@ android {
 
 dependencies {
     implementation(project(":tracy"))
+    implementation(project(":tracy-firebase"))
     implementation(project(":sample-common"))
     implementation(kotlin("stdlib-jdk8"))
+
+    implementation(platform("com.google.firebase:firebase-bom:31.3.0"))
+    implementation("com.google.firebase:firebase-perf-ktx")
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")

@@ -34,10 +34,18 @@ class FirebaseDestination(
 
         for (attr in attrs) {
             when(attr) {
-                is TraceAttribute.StringAttribute -> firebaseTrace?.putAttribute(attr.name, attr.value)
-                is TraceAttribute.LongAttribute -> firebaseTrace?.putMetric(attr.name, attr.value)
+                is TraceAttribute.StringAttribute -> {
+                    firebaseTrace?.putAttribute(attr.name.formatForFirebase(), attr.value)
+                }
+                is TraceAttribute.LongAttribute -> {
+                    firebaseTrace?.putMetric(attr.name.formatForFirebase(), attr.value)
+                }
                 is TraceAttribute.FloatAttribute -> Unit // not supported
             }
         }
+    }
+
+    private fun String.formatForFirebase(): String {
+        return replace("\\s|-".toRegex(), "_")
     }
 }
