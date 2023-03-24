@@ -18,8 +18,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "tracy"
 
-include("tracy")
-include("tracy-firebase")
-include("common")
-include("sample-jvm")
-include(":sample-android")
+include(":common")
+include(":tracy", ":tracy-firebase")
+include(":sample-common", ":sample-jvm", ":sample-android")

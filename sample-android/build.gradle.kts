@@ -34,7 +34,7 @@ android {
 
 dependencies {
     implementation(project(":tracy"))
-
+    implementation(project(":sample-common"))
     implementation(kotlin("stdlib-jdk8"))
 
     implementation("androidx.appcompat:appcompat:1.6.1")

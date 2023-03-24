@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
     implementation(project(":tracy"))
+    implementation(project(":sample-common"))
 }
 
 application {
