@@ -21,8 +21,8 @@ interface Tracy {
                 traceDispatcher = TraceDispatcherImpl(
                     DestinationTraceStateDelegate(
                         listOf(
-                            LoggingDestination(),
-                            //FirebaseDestination()
+                            LoggingDestination("FirstDestination"),
+                            LoggingDestination("SecondDestination")
                         )
                     )
                 )
