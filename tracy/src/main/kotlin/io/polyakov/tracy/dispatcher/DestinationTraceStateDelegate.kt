@@ -3,12 +3,22 @@ package io.polyakov.tracy.dispatcher
 import io.polyakov.tracy.annotation.ExcludeDestination
 import io.polyakov.tracy.destination.TraceDestination
 import io.polyakov.tracy.model.Trace
+import io.polyakov.tracy.model.Trace.State
 
 internal class DestinationTraceStateDelegate(
     private val destinations: List<TraceDestination>
 ) : TraceStateDelegate {
 
-    override fun onTraceStarted(trace: Trace) {
+    override fun onTraceStateChanged(trace: Trace, state: State) {
+        when (state) {
+            State.STARTED ->  processTraceStart(trace)
+            State.STOPPED -> processTraceStop(trace)
+            State.CANCELLED -> processTraceCancelled(trace)
+            else -> println("Trace state is not processed: ${state.name}")
+        }
+    }
+
+    private fun processTraceStart(trace: Trace) {
         destinations.forEach {
             if (isDestinationExcluded(trace, it)) {
                 return@forEach
@@ -18,7 +28,7 @@ internal class DestinationTraceStateDelegate(
         }
     }
 
-    override fun onTraceStopped(trace: Trace) {
+    private fun processTraceStop(trace: Trace) {
         destinations.forEach {
             if (isDestinationExcluded(trace, it)) {
                 return@forEach
@@ -30,7 +40,7 @@ internal class DestinationTraceStateDelegate(
         }
     }
 
-    override fun onTraceCancelled(trace: Trace) {
+    private fun processTraceCancelled(trace: Trace) {
         destinations.forEach {
             if (isDestinationExcluded(trace, it)) {
                 return@forEach
