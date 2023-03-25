@@ -1,5 +1,6 @@
 package io.polyakov.tracy
 
+import io.polyakov.tracy.action.DefaultAffectedDescriptorsRepository
 import io.polyakov.tracy.destination.TraceDestination
 import io.polyakov.tracy.destination.DestinationTraceStateDelegate
 import io.polyakov.tracy.dispatcher.TraceDispatcherImpl
@@ -17,7 +18,7 @@ interface Tracy {
 
         fun init(provider: TraceDescriptorProvider, destinations: List<TraceDestination>) {
             tracy = TracyImpl(
-                traceDescriptorProvider = provider,
+                affectedDescriptorsRepository = DefaultAffectedDescriptorsRepository(provider),
                 traceRegistry = TraceRegistryImpl(TraceImpl.Factory),
                 traceDispatcher = TraceDispatcherImpl(
                     DestinationTraceStateDelegate(destinations)

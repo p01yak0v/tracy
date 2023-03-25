@@ -1,5 +1,7 @@
 package io.polyakov.tracy
 
+import io.polyakov.tracy.action.AffectedDescriptorsRepository
+import io.polyakov.tracy.action.TraceAction
 import io.polyakov.tracy.dispatcher.TraceDispatcher
 import io.polyakov.tracy.model.Checkpoint
 import io.polyakov.tracy.model.TraceDescriptor
@@ -7,26 +9,20 @@ import io.polyakov.tracy.model.TraceDescriptorProvider
 import io.polyakov.tracy.registry.TraceRegistry
 
 internal class TracyImpl(
-    private val traceDescriptorProvider: TraceDescriptorProvider,
+    private val affectedDescriptorsRepository: AffectedDescriptorsRepository,
     private val traceRegistry: TraceRegistry,
     private val traceDispatcher: TraceDispatcher
 ) : Tracy {
 
     override fun pass(checkpoint: Checkpoint) {
-        val descriptors = traceDescriptorProvider.provide()
+        val affectedTraces = affectedDescriptorsRepository.getAffectedTraces(checkpoint)
+        for (trace in affectedTraces) {
+            val (descriptor, action) = trace
 
-        // TODO : there is no need to cycle over all descriptors, we can identify it before hand
-        for (descriptor in descriptors) {
-            when {
-                descriptor.startMatcher.matches(checkpoint) -> {
-                    startTrace(descriptor, checkpoint)
-                }
-                descriptor.stopMatcher.matches(checkpoint) -> {
-                    stopTrace(descriptor, checkpoint)
-                }
-                descriptor.cancelMatcher.matches(checkpoint) -> {
-                    cancelTrace(descriptor, checkpoint)
-                }
+            when (action) {
+                TraceAction.START -> startTrace(descriptor, checkpoint)
+                TraceAction.STOP -> stopTrace(descriptor, checkpoint)
+                TraceAction.CANCEL -> cancelTrace(descriptor, checkpoint)
             }
         }
     }
