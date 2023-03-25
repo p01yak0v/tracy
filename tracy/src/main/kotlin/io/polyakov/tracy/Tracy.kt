@@ -6,6 +6,7 @@ import io.polyakov.tracy.dispatcher.DestinationTraceStateDelegate
 import io.polyakov.tracy.dispatcher.TraceDispatcherImpl
 import io.polyakov.tracy.model.Checkpoint
 import io.polyakov.tracy.model.TraceDescriptorProvider
+import io.polyakov.tracy.model.TraceImpl
 import io.polyakov.tracy.registry.TraceRegistryImpl
 
 interface Tracy {
@@ -18,7 +19,7 @@ interface Tracy {
         fun init(provider: TraceDescriptorProvider, destinations: List<TraceDestination>) {
             tracy = TracyImpl(
                 traceDescriptorProvider = provider,
-                traceRegistry = TraceRegistryImpl(),
+                traceRegistry = TraceRegistryImpl(TraceImpl.Factory),
                 traceDispatcher = TraceDispatcherImpl(
                     DestinationTraceStateDelegate(destinations)
                 )

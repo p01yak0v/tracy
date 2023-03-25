@@ -1,15 +1,12 @@
 package io.polyakov.tracy.model
 
-internal interface OperationalTrace : Trace {
-    fun start(startCheckpoint: Checkpoint)
-    fun addCheckpoint(intermediateCheckpoint: Checkpoint)
-    fun stop(stopCheckpoint: Checkpoint)
-    fun cancel(cancelCheckpoint: Checkpoint)
-}
-
-internal class TraceImpl internal constructor(
+internal class TraceImpl private constructor(
     override val descriptor: TraceDescriptor
 ) : OperationalTrace {
+
+    internal companion object Factory : TraceFactory {
+        override fun create(descriptor: TraceDescriptor) = TraceImpl(descriptor)
+    }
 
     private val _checkpoints = mutableListOf<Checkpoint>()
     override val checkpoints: List<Checkpoint> = _checkpoints
