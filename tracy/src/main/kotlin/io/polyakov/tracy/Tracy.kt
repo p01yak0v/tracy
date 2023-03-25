@@ -1,8 +1,7 @@
 package io.polyakov.tracy
 
-import io.polyakov.tracy.destination.LoggingDestination
 import io.polyakov.tracy.destination.TraceDestination
-import io.polyakov.tracy.dispatcher.DestinationTraceStateDelegate
+import io.polyakov.tracy.destination.DestinationTraceStateDelegate
 import io.polyakov.tracy.dispatcher.TraceDispatcherImpl
 import io.polyakov.tracy.model.Checkpoint
 import io.polyakov.tracy.model.TraceDescriptorProvider

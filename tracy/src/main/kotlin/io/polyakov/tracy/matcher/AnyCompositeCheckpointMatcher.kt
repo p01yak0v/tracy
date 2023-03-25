@@ -1,4 +1,4 @@
-package io.polyakov.tracy
+package io.polyakov.tracy.matcher
 
 import io.polyakov.tracy.model.Checkpoint
 import io.polyakov.tracy.model.CheckpointMatcher

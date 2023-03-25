@@ -1,7 +1,7 @@
-package io.polyakov.tracy.dispatcher
+package io.polyakov.tracy.destination
 
 import io.polyakov.tracy.annotation.ExcludeDestination
-import io.polyakov.tracy.destination.TraceDestination
+import io.polyakov.tracy.dispatcher.TraceStateDelegate
 import io.polyakov.tracy.model.Trace
 import io.polyakov.tracy.model.Trace.State
 
