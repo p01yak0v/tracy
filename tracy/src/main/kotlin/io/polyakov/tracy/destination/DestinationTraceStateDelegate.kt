@@ -1,6 +1,5 @@
 package io.polyakov.tracy.destination
 
-import io.polyakov.tracy.annotation.ExcludeDestination
 import io.polyakov.tracy.dispatcher.TraceStateDelegate
 import io.polyakov.tracy.model.Trace
 import io.polyakov.tracy.model.Trace.State
@@ -50,15 +49,8 @@ internal class DestinationTraceStateDelegate(
         }
     }
 
-    // TODO : optimize this, it takes a while to complete, move to prepared repo
     private fun isDestinationExcluded(trace: Trace, destination: TraceDestination): Boolean {
-        val excludeAnnotation = trace.descriptor::class
-            .annotations
-            .firstOrNull { it is ExcludeDestination } as ExcludeDestination?
-
-        val excludedDestinations = excludeAnnotation?.destinations.orEmpty()
-
-        return excludedDestinations.contains(destination::class)
+        return trace.descriptor.excludedDestinations.contains(destination::class)
     }
 
     private fun fillAttributes(trace: Trace, destination: TraceDestination) {

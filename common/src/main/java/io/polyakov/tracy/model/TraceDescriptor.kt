@@ -1,5 +1,8 @@
 package io.polyakov.tracy.model
 
+import io.polyakov.tracy.destination.TraceDestination
+import kotlin.reflect.KClass
+
 interface TraceDescriptor {
     val startMatcher: CheckpointMatcher
     val stopMatcher: CheckpointMatcher
@@ -8,6 +11,9 @@ interface TraceDescriptor {
     val name: String
 
     val attributeExtractor: AttributeExtractor
+
+    val excludedDestinations: List<KClass<out TraceDestination>>
+        get() = emptyList()
 }
 
 fun interface AttributeExtractor {
