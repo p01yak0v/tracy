@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":tracy"))
+    api(project(":tracy"))
 
     implementation("androidx.fragment:fragment:1.5.6")
 

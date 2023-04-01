@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Tracy Sample App</string>
+    <string name="press_me">Press Me!</string>
+    <string name="not_really_main_string">It\'s not really the Main Screen…</string>
 </resources>

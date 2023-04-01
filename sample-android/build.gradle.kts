@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":tracy"))
+    implementation(project(":tracy-android"))
     implementation(project(":tracy-firebase"))
     implementation(project(":sample-common"))
     implementation(kotlin("stdlib-jdk8"))
