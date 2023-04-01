@@ -1,0 +1,30 @@
+[versions]
+targetSdk = "33"
+minSdk = "24"
+jvmTarget = "1.8"
+
+fragment = "1.5.6"
+appcompat = "1.6.1"
+constraintLayout = "2.1.4"
+firebasePerformance = "20.3.1"
+
+pluginKotlin = "1.8.0"
+pluginAndroid = "7.3.0"
+
+googleServices = "4.3.15"
+
+[libraries]
+androidx-fragment = { module = "androidx.fragment:fragment", version.ref = "fragment" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
+
+firebase-performance = { module = "com.google.firebase:firebase-perf-ktx", version.ref = "firebasePerformance" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "pluginKotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "pluginKotlin" }
+
+android-library = { id = "com.android.library", version.ref = "pluginAndroid" }
+android-application = { id = "com.android.application", version.ref = "pluginAndroid"}
+
+google-services = { id="com.google.gms:google-services", version.ref = "googleServices" }

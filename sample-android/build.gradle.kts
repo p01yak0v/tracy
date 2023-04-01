@@ -1,3 +1,4 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,12 +7,13 @@ plugins {
 
 android {
     namespace = "io.polyakov.tracy.sample.android"
-    compileSdk = 33
+    compileSdk = libs.versions.targetSdk.get().toInt()
 
     defaultConfig {
         applicationId = "io.polyakov.tracy.sample.android"
-        minSdk = 24
-        targetSdk = 33
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+
         versionCode = 1
         versionName = "1.0"
 
@@ -29,7 +31,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = libs.versions.jvmTarget.get()
     }
 }
 
@@ -38,8 +40,7 @@ dependencies {
     implementation(project(":tracy-firebase"))
     implementation(project(":sample-common"))
 
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-
-    implementation("com.google.firebase:firebase-perf-ktx:20.3.1")
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintLayout)
+    implementation(libs.firebase.performance)
 }

@@ -1,5 +1,6 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("jvm") version "1.8.0"
+    alias(libs.plugins.kotlin.jvm)
     application
 }
 
