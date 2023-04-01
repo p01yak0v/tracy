@@ -1,4 +1,4 @@
-package io.polyakov.tracy.firebase
+package io.polyakov.tracy.android.firebase
 
 import com.google.firebase.perf.FirebasePerformance
 import com.google.firebase.perf.metrics.Trace as FirebaseTrace

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "io.polyakov.tracy.android.firebase"
+    namespace = "io.polyakov.tracy.android"
     compileSdk = 33
 
     defaultConfig {
@@ -33,15 +33,9 @@ android {
 }
 
 dependencies {
-    // internal projects
-    implementation(project(":common"))
+    implementation(project(":tracy"))
 
-    // Import the BoM for the Firebase platform
-    implementation(platform("com.google.firebase:firebase-bom:31.2.3"))
-
-    // Add the dependency for the Performance Monitoring library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation("com.google.firebase:firebase-perf-ktx")
+    implementation("androidx.fragment:fragment:1.5.6")
 
     testImplementation("junit:junit:4.13.2")
 

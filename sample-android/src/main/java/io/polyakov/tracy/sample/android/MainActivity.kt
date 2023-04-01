@@ -9,7 +9,7 @@ import io.polyakov.sample.common.checkpoint.StopCheckpoint
 import io.polyakov.sample.common.descriptor.SampleDescriptorProvider
 import io.polyakov.tracy.Tracy
 import io.polyakov.tracy.destination.LoggingDestination
-import io.polyakov.tracy.firebase.FirebaseDestination
+import io.polyakov.tracy.android.firebase.FirebaseDestination
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

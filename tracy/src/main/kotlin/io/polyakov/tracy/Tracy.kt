@@ -14,10 +14,10 @@ interface Tracy {
 
     companion object {
 
-        private lateinit var tracy: Tracy
+        private lateinit var instance: Tracy
 
         fun init(provider: TraceDescriptorProvider, destinations: List<TraceDestination>) {
-            tracy = TracyImpl(
+            instance = TracyImpl(
                 affectedDescriptorsRepository = DefaultAffectedDescriptorsRepository(provider),
                 traceRegistry = TraceRegistryImpl(TraceImpl.Factory),
                 traceDispatcher = TraceDispatcherImpl(
@@ -26,6 +26,6 @@ interface Tracy {
             )
         }
 
-        fun pass(checkpoint: Checkpoint) = tracy.pass(checkpoint)
+        fun pass(checkpoint: Checkpoint) = instance.pass(checkpoint)
     }
 }
