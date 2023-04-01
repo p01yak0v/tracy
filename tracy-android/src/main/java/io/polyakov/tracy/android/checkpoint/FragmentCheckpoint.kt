@@ -15,4 +15,24 @@ class FragmentCheckpoint(
         STARTED, STOPPED,
         VIEW_CREATED, VIEW_DESTROYED
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        if (!super.equals(other)) return false
+
+        other as FragmentCheckpoint
+
+        if (fragmentClass != other.fragmentClass) return false
+        if (state != other.state) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = super.hashCode()
+        result = 31 * result + fragmentClass.hashCode()
+        result = 31 * result + state.hashCode()
+        return result
+    }
 }
