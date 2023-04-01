@@ -4,10 +4,6 @@ plugins {
 
 dependencies {
     api(project(":common"))
-
-    implementation(kotlin("reflect"))
-
-    testImplementation(kotlin("test"))
 }
 
 tasks.test {
