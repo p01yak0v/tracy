@@ -37,4 +37,5 @@ dependencies {
     api(project(":tracy"))
 
     implementation(libs.androidx.fragment)
+    implementation(libs.androidx.lifecycle.process)
 }
