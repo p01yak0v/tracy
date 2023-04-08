@@ -11,8 +11,8 @@ lifecycleProcess = "2.6.1"
 
 pluginKotlin = "1.8.0"
 pluginAndroid = "7.3.0"
-
 googleServices = "4.3.15"
+detekt = "1.23.0-RC1"
 
 [libraries]
 androidx-fragment = { module = "androidx.fragment:fragment", version.ref = "fragment" }
@@ -33,3 +33,4 @@ android-library = { id = "com.android.library", version.ref = "pluginAndroid" }
 android-application = { id = "com.android.application", version.ref = "pluginAndroid"}
 
 google-services = { id="com.google.gms:google-services", version.ref = "googleServices" }
+detekt = { id="io.gitlab.arturbosch.detekt", version.ref="detekt" }

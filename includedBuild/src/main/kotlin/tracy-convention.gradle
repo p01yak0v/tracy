@@ -1,0 +1,9 @@
+plugins {
+    id("io.gitlab.arturbosch.detekt")
+}
+
+detekt {
+    toolVersion = libs.versions.detekt.get()
+    config = files("$rootDir/config/detekt/detekt.yml")
+    buildUponDefaultConfig = true
+}
