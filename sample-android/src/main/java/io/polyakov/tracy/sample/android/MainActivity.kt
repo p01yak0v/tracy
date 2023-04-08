@@ -12,8 +12,14 @@ import io.polyakov.sample.common.descriptor.SampleDescriptorProvider
 import io.polyakov.tracy.Tracy
 import io.polyakov.tracy.destination.LoggingDestination
 import io.polyakov.tracy.android.firebase.FirebaseDestination
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
+
+    private companion object {
+        const val SAMPLE_SLEEP_INTERVAL_IN_MS = 1000L
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         trackDefaultTrace()
@@ -28,7 +34,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun trackDefaultTrace() {
         Tracy.pass(StartCheckpoint)
-        Thread.sleep(1000)
+        Thread.sleep(SAMPLE_SLEEP_INTERVAL_IN_MS)
         Tracy.pass(StopCheckpoint)
     }
 }
