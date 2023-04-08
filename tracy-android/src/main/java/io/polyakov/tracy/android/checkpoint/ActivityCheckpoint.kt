@@ -33,5 +33,4 @@ class ActivityCheckpoint(
         result = 31 * result + state.hashCode()
         return result
     }
-
 }

@@ -10,6 +10,9 @@ import io.polyakov.tracy.Tracy
 import io.polyakov.tracy.android.checkpoint.FragmentCheckpoint
 import io.polyakov.tracy.android.checkpoint.FragmentCheckpoint.FragmentState
 
+// SuppressReason: FragmentLifecycleCallbacks is a third-part interface.
+// Nothing we can do here...
+@Suppress("TooManyFunctions")
 internal class TracyFragmentCallbacks : FragmentLifecycleCallbacks() {
 
     override fun onFragmentAttached(fm: FragmentManager, f: Fragment, context: Context) {
