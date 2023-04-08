@@ -1,7 +1,8 @@
 package io.polyakov.tracy.registry
 
-import io.polyakov.tracy.model.*
 import io.polyakov.tracy.model.OperationalTrace
+import io.polyakov.tracy.model.TraceDescriptor
+import io.polyakov.tracy.model.TraceFactory
 
 internal class TraceRegistryImpl(
     private val traceFactory: TraceFactory
