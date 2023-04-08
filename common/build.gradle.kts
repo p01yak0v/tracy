@@ -1,4 +1,3 @@
 plugins {
-    @Suppress("DSL_SCOPE_VIOLATION")
-    alias(libs.plugins.kotlin.jvm)
+    id("tracy-jvm-convention")
 }

@@ -29,6 +29,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "tracy"
 
+includeBuild("includedBuild")
+
 include(":common")
 include(":tracy", ":tracy-firebase", ":tracy-android")
 include(":sample-common", ":sample-jvm", ":sample-android")

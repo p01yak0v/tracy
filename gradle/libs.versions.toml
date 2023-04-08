@@ -1,7 +1,7 @@
 [versions]
 targetSdk = "33"
 minSdk = "24"
-jvmTarget = "1.8"
+jvmTarget = "11"
 
 fragment = "1.5.6"
 appcompat = "1.6.1"
@@ -21,6 +21,9 @@ androidx-constraintLayout = { module = "androidx.constraintlayout:constraintlayo
 androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycleProcess" }
 
 firebase-performance = { module = "com.google.firebase:firebase-perf-ktx", version.ref = "firebasePerformance" }
+
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref="pluginAndroid" }
+kotlin-gradle-plugin = { module="org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref="pluginKotlin" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "pluginKotlin" }
