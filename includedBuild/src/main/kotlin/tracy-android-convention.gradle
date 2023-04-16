@@ -19,4 +19,14 @@ android {
     kotlinOptions {
         jvmTarget = libs.versions.jvmTarget.get()
     }
+
+    testOptions {
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
+    }
+}
+
+dependencies {
+    testImplementation libs.test.kotest
 }
