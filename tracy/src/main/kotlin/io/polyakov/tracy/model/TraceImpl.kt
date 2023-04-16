@@ -16,14 +16,18 @@ internal class TraceImpl private constructor(
 
     override val duration: Long
         get() {
-            return if (state == Trace.State.STARTED || state == Trace.State.CREATED) {
-                0
-            } else {
+            return if (state == Trace.State.STOPPED) {
                 _checkpoints.last().creationTimestamp - _checkpoints.first().creationTimestamp
+            } else {
+                0
             }
         }
 
     override fun start(startCheckpoint: Checkpoint) {
+        check(state == Trace.State.CREATED) {
+            "You cannot start a trace which is not in ${Trace.State.CREATED} state"
+        }
+
         _checkpoints += startCheckpoint
         state = Trace.State.STARTED
     }
@@ -33,11 +37,19 @@ internal class TraceImpl private constructor(
     }
 
     override fun stop(stopCheckpoint: Checkpoint) {
+        check(state == Trace.State.STARTED) {
+            "You cannot stop a trace which is not in ${Trace.State.STARTED} state"
+        }
+
         _checkpoints += stopCheckpoint
         state = Trace.State.STOPPED
     }
 
     override fun cancel(cancelCheckpoint: Checkpoint) {
+        check(state == Trace.State.STARTED) {
+            "You cannot cancel a trace which is not in ${Trace.State.STARTED} state"
+        }
+
         _checkpoints += cancelCheckpoint
         state = Trace.State.CANCELLED
     }
