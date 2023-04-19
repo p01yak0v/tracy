@@ -1,6 +1,5 @@
 package io.polyakov.tracy.dispatcher
 
-import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.core.spec.style.scopes.BehaviorSpecGivenContainerScope
 import io.kotest.data.forAll
@@ -18,8 +17,6 @@ import io.polyakov.tracy.model.stub.StubCheckpoint
 import io.polyakov.tracy.model.stub.StubTraceDescriptor
 
 class TraceDispatcherTest : BehaviorSpec({
-    isolationMode = IsolationMode.InstancePerLeaf
-
     Given("a trace dispatcher") {
         val traceStateDelegate = AccumulatorTraceStateDelegate()
         val traceDispatcher: TraceDispatcher = TraceDispatcherImpl(traceStateDelegate)

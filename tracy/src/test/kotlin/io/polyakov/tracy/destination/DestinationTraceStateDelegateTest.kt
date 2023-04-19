@@ -1,6 +1,5 @@
 package io.polyakov.tracy.destination
 
-import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
@@ -14,8 +13,6 @@ import io.polyakov.tracy.model.stub.StubTraceDescriptor
 import kotlin.reflect.KClass
 
 internal class DestinationTraceStateDelegateTest : BehaviorSpec({
-    isolationMode = IsolationMode.InstancePerLeaf
-
     Given("instance of DestinationTraceStateDelegate with several destinations") {
         val includedDestination = StubTraceDestination()
         val excludedDestination = YetAnotherStubTraceDestination()

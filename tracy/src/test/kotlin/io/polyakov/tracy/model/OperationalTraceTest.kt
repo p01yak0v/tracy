@@ -1,7 +1,6 @@
 package io.polyakov.tracy.model
 
 import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
@@ -13,8 +12,6 @@ import io.polyakov.tracy.model.stub.StubCheckpoint
 import io.polyakov.tracy.model.stub.StubTraceDescriptor
 
 class OperationalTraceTest : BehaviorSpec({
-    isolationMode = IsolationMode.InstancePerLeaf
-
     Given("an operational trace") {
         val trace: OperationalTrace = TraceImpl.Factory.create(StubTraceDescriptor())
         Then("trace state is ${Trace.State.CREATED}") {
