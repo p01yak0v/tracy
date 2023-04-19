@@ -5,7 +5,7 @@ import io.polyakov.tracy.model.CheckpointMatcher
 import io.polyakov.tracy.model.TraceDescriptor
 
 
-class StubTraceDescriptor(
+open class StubTraceDescriptor(
     override val name: String = DESCRIPTOR_NAME
 ) : TraceDescriptor {
 
