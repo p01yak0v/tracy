@@ -1,7 +1,7 @@
 package io.polyakov.tracy.model
 
 abstract class Checkpoint(val name: String) {
-    val creationTimestamp = System.currentTimeMillis()
+    val creationTimestamp = System.nanoTime()
 
     override fun hashCode() = name.hashCode()
 

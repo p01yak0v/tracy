@@ -1,5 +1,7 @@
 package io.polyakov.tracy.model
 
+import java.util.concurrent.TimeUnit
+
 internal class TraceImpl private constructor(
     override val descriptor: TraceDescriptor
 ) : OperationalTrace {
@@ -18,7 +20,9 @@ internal class TraceImpl private constructor(
     override val duration: Long
         get() {
             return if (state == Trace.State.STOPPED) {
-                _checkpoints.last().creationTimestamp - _checkpoints.first().creationTimestamp
+                TimeUnit.NANOSECONDS.toMillis(
+                    _checkpoints.last().creationTimestamp - _checkpoints.first().creationTimestamp
+                )
             } else {
                 0
             }
