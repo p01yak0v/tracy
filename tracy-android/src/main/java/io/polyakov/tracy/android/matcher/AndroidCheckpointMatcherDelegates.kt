@@ -11,7 +11,7 @@ inline fun <reified T : Activity> activityState(
     return ActivityCheckpointDelegate(T::class, state)
 }
 
-inline fun <reified T : Fragment> byFragmentState(
+inline fun <reified T : Fragment> fragmentState(
     state: FragmentState
 ) : FragmentCheckpointDelegate {
     return FragmentCheckpointDelegate(T::class, state)

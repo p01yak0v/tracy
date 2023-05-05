@@ -4,15 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.perf.ktx.performance
 import io.polyakov.sample.common.checkpoint.StartCheckpoint
 import io.polyakov.sample.common.checkpoint.StopCheckpoint
-import io.polyakov.sample.common.descriptor.SampleDescriptorProvider
 import io.polyakov.tracy.Tracy
-import io.polyakov.tracy.destination.LoggingDestination
-import io.polyakov.tracy.android.firebase.FirebaseDestination
-import java.util.concurrent.TimeUnit
+import io.polyakov.tracy.sample.android.fragment.SampleFragmentsActivity
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -27,7 +22,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val newScreenButton = findViewById<Button>(R.id.press_me_button)
         newScreenButton.setOnClickListener {
             startActivity(
-                Intent(this, NotReallyMainActivity::class.java)
+                Intent(this, SampleFragmentsActivity::class.java)
             )
         }
     }
