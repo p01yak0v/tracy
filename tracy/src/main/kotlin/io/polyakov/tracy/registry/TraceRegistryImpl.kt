@@ -3,21 +3,23 @@ package io.polyakov.tracy.registry
 import io.polyakov.tracy.model.OperationalTrace
 import io.polyakov.tracy.model.TraceDescriptor
 import io.polyakov.tracy.model.TraceFactory
+import java.util.concurrent.ConcurrentHashMap
 
 internal class TraceRegistryImpl(
     private val traceFactory: TraceFactory
 ) : TraceRegistry {
 
-    private val activeTraces = mutableMapOf<String, OperationalTrace>()
+    private val activeTraces = ConcurrentHashMap<String, OperationalTrace>()
 
     override fun createTrace(descriptor: TraceDescriptor): OperationalTrace? {
         if (activeTraces.containsKey(descriptor.name)) {
             return null
         }
 
-        return traceFactory.create(descriptor).also {
-            activeTraces[descriptor.name] = it
-        }
+        val newTrace = traceFactory.create(descriptor)
+        val result = activeTraces.putIfAbsent(descriptor.name, newTrace)
+
+        return if (result != null) null else newTrace
     }
 
     override fun removeTrace(descriptor: TraceDescriptor): OperationalTrace? {

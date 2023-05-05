@@ -11,6 +11,7 @@ internal class TraceImpl private constructor(
     private val _checkpoints = mutableListOf<Checkpoint>()
     override val checkpoints: List<Checkpoint> = _checkpoints
 
+    @Volatile
     override var state: Trace.State = Trace.State.CREATED
         private set
 
@@ -23,34 +24,42 @@ internal class TraceImpl private constructor(
             }
         }
 
-    override fun start(startCheckpoint: Checkpoint) {
-        check(state == Trace.State.CREATED) {
-            "You cannot start a trace which is not in ${Trace.State.CREATED} state"
-        }
+    override fun start(startCheckpoint: Checkpoint): Boolean {
+        // only created trace could be started
+        if (state != Trace.State.CREATED) return false
 
-        _checkpoints += startCheckpoint
         state = Trace.State.STARTED
+        _checkpoints += startCheckpoint
+
+        return true
     }
 
-    override fun addCheckpoint(intermediateCheckpoint: Checkpoint) {
+    override fun addCheckpoint(intermediateCheckpoint: Checkpoint): Boolean {
+        // checkpoints could be added only for started traces
+        if (state != Trace.State.STARTED) return false
+
         _checkpoints += intermediateCheckpoint
+
+        return true
     }
 
-    override fun stop(stopCheckpoint: Checkpoint) {
-        check(state == Trace.State.STARTED) {
-            "You cannot stop a trace which is not in ${Trace.State.STARTED} state"
-        }
+    override fun stop(stopCheckpoint: Checkpoint): Boolean {
+        // only started trace could be stopped
+        if (state != Trace.State.STARTED) return false
 
-        _checkpoints += stopCheckpoint
         state = Trace.State.STOPPED
+        _checkpoints += stopCheckpoint
+
+        return true
     }
 
-    override fun cancel(cancelCheckpoint: Checkpoint) {
-        check(state == Trace.State.STARTED) {
-            "You cannot cancel a trace which is not in ${Trace.State.STARTED} state"
-        }
+    override fun cancel(cancelCheckpoint: Checkpoint): Boolean {
+        // only started trace could be cancelled
+        if (state != Trace.State.STARTED) return false
 
-        _checkpoints += cancelCheckpoint
         state = Trace.State.CANCELLED
+        _checkpoints += cancelCheckpoint
+
+        return true
     }
 }

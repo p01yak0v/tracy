@@ -2,7 +2,6 @@ package io.polyakov.tracy.dispatcher
 
 import io.polyakov.tracy.model.Checkpoint
 import io.polyakov.tracy.model.OperationalTrace
-import io.polyakov.tracy.model.Trace
 import io.polyakov.tracy.model.Trace.State
 
 internal class TraceDispatcherImpl(
@@ -14,9 +13,9 @@ internal class TraceDispatcherImpl(
             return
         }
 
-        trace.start(startCheckpoint)
-
-        traceStateDelegate.onTraceStateChanged(trace, State.STARTED)
+        if (trace.start(startCheckpoint)) {
+            traceStateDelegate.onTraceStateChanged(trace, State.STARTED)
+        }
     }
 
     override fun dispatchCancel(trace: OperationalTrace, cancelCheckpoint: Checkpoint) {
@@ -24,9 +23,9 @@ internal class TraceDispatcherImpl(
             return
         }
 
-        trace.cancel(cancelCheckpoint)
-
-        traceStateDelegate.onTraceStateChanged(trace, State.CANCELLED)
+        if (trace.cancel(cancelCheckpoint)) {
+            traceStateDelegate.onTraceStateChanged(trace, State.CANCELLED)
+        }
     }
 
     override fun dispatchMediate(trace: OperationalTrace, intermediateCheckpoint: Checkpoint) {
@@ -42,8 +41,8 @@ internal class TraceDispatcherImpl(
             return
         }
 
-        trace.stop(stopCheckpoint)
-
-        traceStateDelegate.onTraceStateChanged(trace, State.STOPPED)
+        if (trace.stop(stopCheckpoint)) {
+            traceStateDelegate.onTraceStateChanged(trace, State.STOPPED)
+        }
     }
 }

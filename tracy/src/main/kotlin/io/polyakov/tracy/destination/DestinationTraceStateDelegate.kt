@@ -10,7 +10,7 @@ internal class DestinationTraceStateDelegate(
 
     override fun onTraceStateChanged(trace: Trace, state: State) {
         when (state) {
-            State.STARTED ->  processTraceStart(trace)
+            State.STARTED -> processTraceStart(trace)
             State.STOPPED -> processTraceStop(trace)
             State.CANCELLED -> processTraceCancelled(trace)
             else -> println("Trace state is not processed: ${state.name}")

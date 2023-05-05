@@ -5,7 +5,6 @@ import io.polyakov.tracy.action.TraceAction
 import io.polyakov.tracy.dispatcher.TraceDispatcher
 import io.polyakov.tracy.model.Checkpoint
 import io.polyakov.tracy.model.TraceDescriptor
-import io.polyakov.tracy.model.TraceDescriptorProvider
 import io.polyakov.tracy.registry.TraceRegistry
 
 internal class TracyImpl(

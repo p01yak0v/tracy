@@ -9,11 +9,11 @@ internal class StubOperationalTrace(
     override val descriptor: TraceDescriptor
 ) : OperationalTrace {
 
-    override fun start(startCheckpoint: Checkpoint) = Unit
-    override fun addCheckpoint(intermediateCheckpoint: Checkpoint) = Unit
-    override fun stop(stopCheckpoint: Checkpoint) = Unit
+    override fun start(startCheckpoint: Checkpoint) = true
+    override fun addCheckpoint(intermediateCheckpoint: Checkpoint) = true
+    override fun stop(stopCheckpoint: Checkpoint) = true
 
-    override fun cancel(cancelCheckpoint: Checkpoint) = Unit
+    override fun cancel(cancelCheckpoint: Checkpoint) = true
 
     override val checkpoints: List<Checkpoint> = emptyList()
     override val state: Trace.State = Trace.State.CREATED

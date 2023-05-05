@@ -19,7 +19,7 @@ internal class DefaultAffectedDescriptorsRepository(
     private fun identifyAffectedDescriptors(checkpoint: Checkpoint): List<AffectedDescriptor> {
         val affectedTraces = mutableListOf<AffectedDescriptor>()
 
-        for (d in descriptors) {
+        descriptors.forEach { d ->
             when {
                 d.startMatcher.matches(checkpoint) -> {
                     affectedTraces += d to TraceAction.START

@@ -1,13 +1,11 @@
 package io.polyakov.tracy.model
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.collections.shouldContainOnly
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.types.shouldBeTypeOf
 import io.polyakov.tracy.model.stub.StubCheckpoint
 import io.polyakov.tracy.model.stub.StubTraceDescriptor
 
@@ -40,13 +38,10 @@ class OperationalTraceTest : BehaviorSpec({
                 }
 
                 And("cancel a trace") {
-                    val cancelCheckpoint = StubCheckpoint("cancel")
-                    val exception = shouldThrow<IllegalStateException> {
-                        trace.cancel(cancelCheckpoint)
-                    }
+                    val cancelResult = trace.cancel(StubCheckpoint("cancel"))
 
-                    Then("exception is occurred") {
-                        exception.shouldBeTypeOf<IllegalStateException>()
+                    Then("cancel is not occurred") {
+                        cancelResult shouldBe false
                     }
                 }
             }
@@ -64,13 +59,10 @@ class OperationalTraceTest : BehaviorSpec({
                 }
 
                 And("stop a trace") {
-                    val stopCheckpoint = StubCheckpoint("stop")
-                    val exception = shouldThrow<IllegalStateException> {
-                        trace.stop(stopCheckpoint)
-                    }
+                    val stopResult = trace.stop(StubCheckpoint("stop"))
 
-                    Then("exception is occurred") {
-                        exception.shouldBeTypeOf<IllegalStateException>()
+                    Then("trace is not stopped") {
+                        stopResult shouldBe false
                     }
                 }
             }
@@ -80,16 +72,12 @@ class OperationalTraceTest : BehaviorSpec({
         forAll(
             row("stop", OperationalTrace::stop),
             row("cancel", OperationalTrace::cancel)
-        ) { label: String, operation: OperationalTrace.(Checkpoint) -> Unit ->
+        ) { label: String, operation: OperationalTrace.(Checkpoint) -> Boolean ->
             When("$label a trace") {
-                val checkpoint = StubCheckpoint(label)
+                val operationResult = trace.operation(StubCheckpoint(label))
 
-                val exception = shouldThrow<IllegalStateException> {
-                    trace.operation(checkpoint)
-                }
-
-                Then("exception is thrown") {
-                    exception.shouldBeTypeOf<IllegalStateException>()
+                Then("$label operation is not executed") {
+                    operationResult shouldBe false
                 }
             }
         }

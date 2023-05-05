@@ -1,8 +1,8 @@
 package io.polyakov.tracy.model
 
 internal interface OperationalTrace : Trace {
-    fun start(startCheckpoint: Checkpoint)
-    fun addCheckpoint(intermediateCheckpoint: Checkpoint)
-    fun stop(stopCheckpoint: Checkpoint)
-    fun cancel(cancelCheckpoint: Checkpoint)
+    fun start(startCheckpoint: Checkpoint): Boolean
+    fun addCheckpoint(intermediateCheckpoint: Checkpoint): Boolean
+    fun stop(stopCheckpoint: Checkpoint): Boolean
+    fun cancel(cancelCheckpoint: Checkpoint): Boolean
 }
