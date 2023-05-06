@@ -19,4 +19,3 @@ interface TraceDescriptor {
     val excludedDestinations: List<KClass<out TraceDestination>>
         get() = emptyList()
 }
-

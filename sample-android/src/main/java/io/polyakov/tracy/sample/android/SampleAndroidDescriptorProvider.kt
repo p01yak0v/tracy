@@ -16,6 +16,5 @@ class SampleAndroidDescriptorProvider(
         ).apply {
             addAll(decorated.provide())
         }
-
     }
 }

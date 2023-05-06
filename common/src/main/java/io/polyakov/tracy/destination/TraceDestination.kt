@@ -1,7 +1,7 @@
 package io.polyakov.tracy.destination
 
-import io.polyakov.tracy.model.Trace
 import io.polyakov.tracy.attribute.TraceAttribute
+import io.polyakov.tracy.model.Trace
 
 interface TraceDestination {
     fun start(trace: Trace)

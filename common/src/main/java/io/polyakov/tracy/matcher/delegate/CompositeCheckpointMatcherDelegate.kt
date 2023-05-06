@@ -10,7 +10,6 @@ class CompositeCheckpointMatcherDelegate(
 ) : CheckpointMatcherDelegate {
 
     override fun getValue(thisRef: Any?, property: KProperty<*>): CheckpointMatcher {
-
         return operator(
             firstDelegate.getValue(thisRef, property),
             secondDelegate.getValue(thisRef, property)
