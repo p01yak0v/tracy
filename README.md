@@ -1,5 +1,5 @@
 > **Note** 
-> 
+>  
 > Tracy is in WIP state. Some functionality might be not implemented or broken, but not for long.
 > Stay tuned! :wink:
 
