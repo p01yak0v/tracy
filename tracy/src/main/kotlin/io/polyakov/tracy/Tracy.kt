@@ -1,11 +1,11 @@
 package io.polyakov.tracy
 
 import io.polyakov.tracy.action.DefaultAffectedDescriptorsRepository
-import io.polyakov.tracy.destination.TraceDestination
+import io.polyakov.tracy.descriptor.TraceDescriptorProvider
 import io.polyakov.tracy.destination.DestinationTraceStateDelegate
+import io.polyakov.tracy.destination.TraceDestination
 import io.polyakov.tracy.dispatcher.TraceDispatcherImpl
 import io.polyakov.tracy.model.Checkpoint
-import io.polyakov.tracy.descriptor.TraceDescriptorProvider
 import io.polyakov.tracy.model.TraceImpl
 import io.polyakov.tracy.registry.TraceRegistryImpl
 

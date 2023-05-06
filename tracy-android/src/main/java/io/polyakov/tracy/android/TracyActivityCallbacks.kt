@@ -9,7 +9,7 @@ import io.polyakov.tracy.Tracy
 import io.polyakov.tracy.android.checkpoint.ActivityCheckpoint
 import io.polyakov.tracy.android.checkpoint.ActivityCheckpoint.ActivityState
 
-class TracyActivityCallbacks(isFragmentRequired: Boolean): ActivityLifecycleCallbacks {
+class TracyActivityCallbacks(isFragmentRequired: Boolean) : ActivityLifecycleCallbacks {
 
     private val fragmentCallbacks: FragmentLifecycleCallbacks?
 

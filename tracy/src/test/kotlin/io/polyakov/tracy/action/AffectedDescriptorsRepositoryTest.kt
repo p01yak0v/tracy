@@ -44,7 +44,8 @@ class AffectedDescriptorsRepositoryTest : BehaviorSpec({
         }
 
         forAll(
-            row("stop",
+            row(
+                "stop",
                 DynamicTraceDescriptor::stopMatcher,
                 firstTraceDescriptor.stopCheckpointName,
                 TraceAction.STOP
@@ -62,7 +63,7 @@ class AffectedDescriptorsRepositoryTest : BehaviorSpec({
                 TraceAction.CANCEL
             ),
         ) { label: String, matcher: DynamicTraceDescriptor.() -> DynamicNameCheckpointMatcher,
-            firstCheckpointName: String, action: TraceAction ->
+                firstCheckpointName: String, action: TraceAction ->
             And("second trace has the same $label checkpoint as the first one") {
                 secondTraceDescriptor.matcher().checkpointName = firstCheckpointName
 

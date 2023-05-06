@@ -1,7 +1,7 @@
 package io.polyakov.tracy.destination
 
-import io.polyakov.tracy.model.Trace
 import io.polyakov.tracy.attribute.TraceAttribute
+import io.polyakov.tracy.model.Trace
 
 class LoggingDestination(private val tag: String) : TraceDestination {
 
@@ -18,7 +18,7 @@ class LoggingDestination(private val tag: String) : TraceDestination {
     }
 
     override fun fillAttributes(trace: Trace, attrs: List<TraceAttribute<*>>) {
-        for(a in attrs) {
+        for (a in attrs) {
             println("[$tag] ${a.name}=${a.value}")
         }
     }

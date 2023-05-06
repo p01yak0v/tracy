@@ -4,9 +4,9 @@ import io.polyakov.sample.common.checkpoint.CancelCheckpoint
 import io.polyakov.sample.common.checkpoint.StartCheckpoint
 import io.polyakov.sample.common.checkpoint.StopCheckpoint
 import io.polyakov.tracy.attribute.AttributeExtractor
-import io.polyakov.tracy.matcher.CheckpointMatcher
-import io.polyakov.tracy.descriptor.TraceDescriptor
 import io.polyakov.tracy.attribute.attr
+import io.polyakov.tracy.descriptor.TraceDescriptor
+import io.polyakov.tracy.matcher.CheckpointMatcher
 
 class SampleTrace : TraceDescriptor {
     override val name: String = "sample-trace"

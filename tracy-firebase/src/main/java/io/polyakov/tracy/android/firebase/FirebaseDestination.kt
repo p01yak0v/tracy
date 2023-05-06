@@ -1,10 +1,10 @@
 package io.polyakov.tracy.android.firebase
 
 import com.google.firebase.perf.FirebasePerformance
-import com.google.firebase.perf.metrics.Trace as FirebaseTrace
+import io.polyakov.tracy.attribute.TraceAttribute
 import io.polyakov.tracy.destination.TraceDestination
 import io.polyakov.tracy.model.Trace
-import io.polyakov.tracy.attribute.TraceAttribute
+import com.google.firebase.perf.metrics.Trace as FirebaseTrace
 
 class FirebaseDestination(
     private val firebasePerformance: FirebasePerformance
@@ -33,7 +33,7 @@ class FirebaseDestination(
         val firebaseTrace = activeTraces[trace.descriptor.name]
 
         for (attr in attrs) {
-            when(attr) {
+            when (attr) {
                 is TraceAttribute.StringAttribute -> {
                     firebaseTrace?.putAttribute(attr.name.formatForFirebase(), attr.value)
                 }

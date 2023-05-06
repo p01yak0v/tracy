@@ -17,5 +17,4 @@ internal class DynamicTraceDescriptor(name: String) : StubTraceDescriptor(name) 
     override val startMatcher = DynamicNameCheckpointMatcher(startCheckpointName)
     override val stopMatcher = DynamicNameCheckpointMatcher(stopCheckpointName)
     override val cancelMatcher = DynamicNameCheckpointMatcher(cancelCheckpointName)
-
 }

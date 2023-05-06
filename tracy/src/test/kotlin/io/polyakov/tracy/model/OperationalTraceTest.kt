@@ -31,12 +31,9 @@ class OperationalTraceTest : BehaviorSpec({
 
                 Then("trace state is ${Trace.State.STOPPED}; checkpoints updated; duration calculated") {
                     trace.state shouldBe Trace.State.STOPPED
-                    val traceDurationInMs = (stopCheckpoint.creationTimestamp -
-                            startCheckpoint.creationTimestamp) / 1_000_000
-                    trace.duration shouldBe traceDurationInMs
-                    trace.checkpoints shouldContainExactly(
-                        listOf(startCheckpoint, stopCheckpoint)
-                    )
+                    val nsDuration = stopCheckpoint.creationTimestamp - startCheckpoint.creationTimestamp
+                    trace.duration shouldBe (nsDuration / 1_000_000)
+                    trace.checkpoints shouldContainExactly listOf(startCheckpoint, stopCheckpoint)
                 }
 
                 And("cancel a trace") {
@@ -57,7 +54,7 @@ class OperationalTraceTest : BehaviorSpec({
                     trace.duration shouldBe 0
                     trace.checkpoints shouldContainExactly(
                         listOf(startCheckpoint, cancelCheckpoint)
-                    )
+                        )
                 }
 
                 And("stop a trace") {

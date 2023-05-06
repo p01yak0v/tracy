@@ -7,13 +7,12 @@ import io.polyakov.tracy.android.checkpoint.FragmentCheckpoint.FragmentState
 
 inline fun <reified T : Activity> activityState(
     state: ActivityState
-) : ActivityCheckpointDelegate {
+): ActivityCheckpointDelegate {
     return ActivityCheckpointDelegate(T::class, state)
 }
 
 inline fun <reified T : Fragment> fragmentState(
     state: FragmentState
-) : FragmentCheckpointDelegate {
+): FragmentCheckpointDelegate {
     return FragmentCheckpointDelegate(T::class, state)
 }
-

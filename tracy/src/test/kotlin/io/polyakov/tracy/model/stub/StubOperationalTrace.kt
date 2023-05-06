@@ -1,9 +1,9 @@
 package io.polyakov.tracy.model.stub
 
+import io.polyakov.tracy.descriptor.TraceDescriptor
 import io.polyakov.tracy.model.Checkpoint
 import io.polyakov.tracy.model.OperationalTrace
 import io.polyakov.tracy.model.Trace
-import io.polyakov.tracy.descriptor.TraceDescriptor
 
 internal class StubOperationalTrace(
     override val descriptor: TraceDescriptor

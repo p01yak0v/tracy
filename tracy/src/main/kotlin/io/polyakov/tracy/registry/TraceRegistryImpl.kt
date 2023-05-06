@@ -1,7 +1,7 @@
 package io.polyakov.tracy.registry
 
-import io.polyakov.tracy.model.OperationalTrace
 import io.polyakov.tracy.descriptor.TraceDescriptor
+import io.polyakov.tracy.model.OperationalTrace
 import io.polyakov.tracy.model.TraceFactory
 import java.util.concurrent.ConcurrentHashMap
 
