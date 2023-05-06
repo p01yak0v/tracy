@@ -1,3 +1,8 @@
+> **Note** 
+> 
+> Tracy is in WIP state. Some functionality might be not implemented or broken, but not for long.
+> Stay tuned! :wink:
+
 Tracy is a simple library is intended to help you to capture performance traces in a simple way.
 
 [Quick Start Guide](//TODO)
