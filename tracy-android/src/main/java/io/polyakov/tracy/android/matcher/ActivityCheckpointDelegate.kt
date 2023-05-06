@@ -3,7 +3,7 @@ package io.polyakov.tracy.android.matcher
 import android.app.Activity
 import io.polyakov.tracy.android.checkpoint.ActivityCheckpoint
 import io.polyakov.tracy.matcher.delegate.CheckpointMatcherDelegate
-import io.polyakov.tracy.model.CheckpointMatcher
+import io.polyakov.tracy.matcher.CheckpointMatcher
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 

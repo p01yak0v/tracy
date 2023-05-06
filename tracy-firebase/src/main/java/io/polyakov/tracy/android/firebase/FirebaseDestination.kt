@@ -4,7 +4,7 @@ import com.google.firebase.perf.FirebasePerformance
 import com.google.firebase.perf.metrics.Trace as FirebaseTrace
 import io.polyakov.tracy.destination.TraceDestination
 import io.polyakov.tracy.model.Trace
-import io.polyakov.tracy.model.TraceAttribute
+import io.polyakov.tracy.attribute.TraceAttribute
 
 class FirebaseDestination(
     private val firebasePerformance: FirebasePerformance

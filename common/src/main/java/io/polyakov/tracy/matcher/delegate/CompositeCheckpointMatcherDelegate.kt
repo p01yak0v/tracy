@@ -1,6 +1,6 @@
 package io.polyakov.tracy.matcher.delegate
 
-import io.polyakov.tracy.model.CheckpointMatcher
+import io.polyakov.tracy.matcher.CheckpointMatcher
 import kotlin.reflect.KProperty
 
 class CompositeCheckpointMatcherDelegate(

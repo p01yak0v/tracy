@@ -1,8 +1,7 @@
 package io.polyakov.tracy.model.stub
 
-import io.polyakov.tracy.model.AttributeExtractor
-import io.polyakov.tracy.model.CheckpointMatcher
-import io.polyakov.tracy.model.TraceDescriptor
+import io.polyakov.tracy.matcher.CheckpointMatcher
+import io.polyakov.tracy.descriptor.TraceDescriptor
 
 
 open class StubTraceDescriptor(
@@ -16,5 +15,4 @@ open class StubTraceDescriptor(
     override val startMatcher = CheckpointMatcher { true }
     override val stopMatcher = CheckpointMatcher { true }
     override val cancelMatcher = CheckpointMatcher { true }
-    override val attributeExtractor = AttributeExtractor { emptyList() }
 }

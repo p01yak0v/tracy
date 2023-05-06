@@ -2,7 +2,7 @@ package io.polyakov.tracy.destination.stub
 
 import io.polyakov.tracy.destination.TraceDestination
 import io.polyakov.tracy.model.Trace
-import io.polyakov.tracy.model.TraceAttribute
+import io.polyakov.tracy.attribute.TraceAttribute
 
 internal open class StubTraceDestination : TraceDestination {
 

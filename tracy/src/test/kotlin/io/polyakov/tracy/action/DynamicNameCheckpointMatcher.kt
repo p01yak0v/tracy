@@ -1,7 +1,7 @@
 package io.polyakov.tracy.action
 
 import io.polyakov.tracy.model.Checkpoint
-import io.polyakov.tracy.model.CheckpointMatcher
+import io.polyakov.tracy.matcher.CheckpointMatcher
 
 class DynamicNameCheckpointMatcher(var checkpointName: String) : CheckpointMatcher {
 

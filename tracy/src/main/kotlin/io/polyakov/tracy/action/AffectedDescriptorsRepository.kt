@@ -1,7 +1,7 @@
 package io.polyakov.tracy.action
 
 import io.polyakov.tracy.model.Checkpoint
-import io.polyakov.tracy.model.TraceDescriptor
+import io.polyakov.tracy.descriptor.TraceDescriptor
 
 internal typealias AffectedDescriptor=Pair<TraceDescriptor, TraceAction>
 

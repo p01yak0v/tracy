@@ -1,7 +1,7 @@
 package io.polyakov.tracy.action
 
 import io.polyakov.tracy.model.Checkpoint
-import io.polyakov.tracy.model.TraceDescriptorProvider
+import io.polyakov.tracy.descriptor.TraceDescriptorProvider
 
 internal class DefaultAffectedDescriptorsRepository(
     descriptorsProvider: TraceDescriptorProvider

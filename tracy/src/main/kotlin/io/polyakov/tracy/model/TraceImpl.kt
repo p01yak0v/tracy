@@ -1,5 +1,6 @@
 package io.polyakov.tracy.model
 
+import io.polyakov.tracy.descriptor.TraceDescriptor
 import java.util.concurrent.TimeUnit
 
 internal class TraceImpl private constructor(

@@ -4,8 +4,8 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.data.forAll
 import io.kotest.data.row
 import io.kotest.matchers.collections.shouldContainExactly
-import io.polyakov.tracy.model.TraceDescriptor
-import io.polyakov.tracy.model.TraceDescriptorProvider
+import io.polyakov.tracy.descriptor.TraceDescriptor
+import io.polyakov.tracy.descriptor.TraceDescriptorProvider
 import io.polyakov.tracy.model.stub.StubCheckpoint
 
 class AffectedDescriptorsRepositoryTest : BehaviorSpec({

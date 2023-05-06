@@ -1,7 +1,7 @@
 package io.polyakov.sample.common.descriptor
 
-import io.polyakov.tracy.model.TraceDescriptor
-import io.polyakov.tracy.model.TraceDescriptorProvider
+import io.polyakov.tracy.descriptor.TraceDescriptor
+import io.polyakov.tracy.descriptor.TraceDescriptorProvider
 
 class SampleDescriptorProvider : TraceDescriptorProvider {
     override fun provide(): Set<TraceDescriptor> {

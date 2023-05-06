@@ -2,7 +2,7 @@ package io.polyakov.tracy.android.matcher
 
 import androidx.fragment.app.Fragment
 import io.polyakov.tracy.android.checkpoint.FragmentCheckpoint
-import io.polyakov.tracy.model.CheckpointMatcher
+import io.polyakov.tracy.matcher.CheckpointMatcher
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
