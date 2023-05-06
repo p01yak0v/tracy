@@ -6,14 +6,14 @@ import io.polyakov.sample.common.checkpoint.StopCheckpoint
 import io.polyakov.tracy.attribute.AttributeExtractor
 import io.polyakov.tracy.attribute.attr
 import io.polyakov.tracy.descriptor.TraceDescriptor
-import io.polyakov.tracy.matcher.CheckpointMatcher
+import io.polyakov.tracy.matcher.delegate.classMatcher
 
 class SampleTrace : TraceDescriptor {
     override val name: String = "sample-trace"
 
-    override val startMatcher = CheckpointMatcher { it is StartCheckpoint }
-    override val stopMatcher = CheckpointMatcher { it is StopCheckpoint }
-    override val cancelMatcher = CheckpointMatcher { it is CancelCheckpoint }
+    override val startMatcher by classMatcher<StartCheckpoint>()
+    override val stopMatcher by classMatcher<StopCheckpoint>()
+    override val cancelMatcher by classMatcher<CancelCheckpoint>()
 
     override val attributeExtractor: AttributeExtractor = AttributeExtractor {
         when (it) {

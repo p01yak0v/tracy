@@ -16,3 +16,9 @@ class ActivityCheckpointDelegate(
         it is ActivityCheckpoint && it.activityClass == targetActivityClass && it.state == targetState
     }
 }
+
+inline fun <reified T : Activity> activityState(
+    state: ActivityCheckpoint.ActivityState
+): ActivityCheckpointDelegate {
+    return ActivityCheckpointDelegate(T::class, state)
+}

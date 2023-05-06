@@ -16,3 +16,9 @@ class FragmentCheckpointDelegate(
         it is FragmentCheckpoint && it.fragmentClass == targetFragmentClass && it.state == targetState
     }
 }
+
+inline fun <reified T : Fragment> fragmentState(
+    state: FragmentCheckpoint.FragmentState
+): FragmentCheckpointDelegate {
+    return FragmentCheckpointDelegate(T::class, state)
+}
