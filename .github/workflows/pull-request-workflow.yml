@@ -4,7 +4,6 @@ on:
   push:
     branches: [ $default-branch ]
   pull_request:
-    branches: [ $default-branch ]
     types: [ opened, reopened, synchronize ]
 jobs:
   pull-request-checks:
@@ -24,8 +23,10 @@ jobs:
       - name: build
         uses: gradle/gradle-build-action@v2.4.2
         with:
-          arguments: assemble
+          # exclude sample app because google-services.json is put under .gitignore
+          arguments: "assemble -x sample-android:assemble"
       - name: run tests
         uses: gradle/gradle-build-action@v2.4.2
         with:
-          arguments: test
+          # exclude all samples because there is no any tests there
+          arguments: "test -x sample-android:test -x sample-common:test -x sample-jvm:test"
