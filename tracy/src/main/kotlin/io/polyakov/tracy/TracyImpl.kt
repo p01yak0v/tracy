@@ -18,11 +18,14 @@ internal class TracyImpl(
         for (trace in affectedTraces) {
             val (descriptor, action) = trace
 
-            when (action) {
-                TraceAction.START -> startTrace(descriptor, checkpoint)
-                TraceAction.STOP -> stopTrace(descriptor, checkpoint)
-                TraceAction.CANCEL -> cancelTrace(descriptor, checkpoint)
+            val actionHandler = when (action) {
+                TraceAction.START -> ::startTrace
+                TraceAction.STOP -> ::stopTrace
+                TraceAction.CANCEL -> ::cancelTrace
+                TraceAction.ENRICH -> ::enrichTrace
             }
+
+            actionHandler(descriptor, checkpoint)
         }
     }
 
@@ -54,5 +57,15 @@ internal class TracyImpl(
         }
 
         traceDispatcher.dispatchCancel(trace, cancelCheckpoint)
+    }
+
+    private fun enrichTrace(descriptor: TraceDescriptor, enrichmentCheckpoint: Checkpoint) {
+        val trace = traceRegistry.getTrace(descriptor)
+        if (trace == null) {
+            // TODO : enriching already destroyed or not yet created trace
+            return
+        }
+
+        traceDispatcher.dispatchEnrichment(trace, enrichmentCheckpoint)
     }
 }

@@ -1,5 +1,5 @@
 package io.polyakov.tracy.action
 
 internal enum class TraceAction {
-    START, STOP, CANCEL
+    START, STOP, CANCEL, ENRICH
 }

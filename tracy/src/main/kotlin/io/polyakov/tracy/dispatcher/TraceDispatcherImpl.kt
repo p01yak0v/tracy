@@ -28,12 +28,12 @@ internal class TraceDispatcherImpl(
         }
     }
 
-    override fun dispatchMediate(trace: OperationalTrace, intermediateCheckpoint: Checkpoint) {
+    override fun dispatchEnrichment(trace: OperationalTrace, enrichmentCheckpoint: Checkpoint) {
         if (trace.state != State.STARTED) {
             return
         }
 
-        trace.addCheckpoint(intermediateCheckpoint)
+        trace.addCheckpoint(enrichmentCheckpoint)
     }
 
     override fun dispatchStop(trace: OperationalTrace, stopCheckpoint: Checkpoint) {
