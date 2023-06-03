@@ -22,6 +22,10 @@ internal class TraceRegistryImpl(
         return if (result != null) null else newTrace
     }
 
+    override fun getTrace(descriptor: TraceDescriptor): OperationalTrace? {
+        return activeTraces[descriptor.name]
+    }
+
     override fun removeTrace(descriptor: TraceDescriptor): OperationalTrace? {
         return activeTraces.remove(descriptor.name)
     }

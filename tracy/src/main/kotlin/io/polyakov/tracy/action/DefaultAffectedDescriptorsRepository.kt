@@ -1,5 +1,6 @@
 package io.polyakov.tracy.action
 
+import io.polyakov.tracy.descriptor.EnrichableTraceDescriptor
 import io.polyakov.tracy.descriptor.TraceDescriptorProvider
 import io.polyakov.tracy.model.Checkpoint
 
@@ -29,6 +30,9 @@ internal class DefaultAffectedDescriptorsRepository(
                 }
                 d.cancelMatcher.matches(checkpoint) -> {
                     affectedTraces += d to TraceAction.CANCEL
+                }
+                d is EnrichableTraceDescriptor && d.enrichmentMatcher.matches(checkpoint) -> {
+                    affectedTraces += d to TraceAction.ENRICH
                 }
             }
         }

@@ -72,7 +72,7 @@ private suspend fun BehaviorSpecGivenContainerScope.runTestsForCreatedTrace(
     forAll(
         row("stop", TraceDispatcher::dispatchStop),
         row("cancel", TraceDispatcher::dispatchCancel),
-        row("mediate", TraceDispatcher::dispatchMediate)
+        row("mediate", TraceDispatcher::dispatchEnrichment)
     ) { label: String, operation: TraceDispatcher.(OperationalTrace, Checkpoint) -> Unit ->
         When("$label a trace") {
             traceDispatcher.operation(trace, checkpoint)
@@ -121,7 +121,7 @@ private suspend fun BehaviorSpecGivenContainerScope.runTestsForStartedTrace(
     }
 
     When("mediate a trace") {
-        traceDispatcher.dispatchMediate(trace, checkpoint)
+        traceDispatcher.dispatchEnrichment(trace, checkpoint)
 
         Then("trace state stays unchanged; change not dispatched; checkpoint is added") {
             trace.state shouldBe Trace.State.STARTED
@@ -152,7 +152,7 @@ private suspend fun BehaviorSpecGivenContainerScope.runTestsForTerminatedTrace(
         row("start", TraceDispatcher::dispatchStart),
         row("stop", TraceDispatcher::dispatchStop),
         row("cancel", TraceDispatcher::dispatchCancel),
-        row("mediate", TraceDispatcher::dispatchMediate)
+        row("mediate", TraceDispatcher::dispatchEnrichment)
     ) { label: String, operation: TraceDispatcher.(OperationalTrace, Checkpoint) -> Unit ->
         When("$label a trace") {
             traceDispatcher.operation(trace, checkpoint)
@@ -182,7 +182,7 @@ private suspend fun BehaviorSpecGivenContainerScope.runTestsForMediatedTrace(
     traceDispatcher.dispatchStart(trace, startCheckpoint)
 
     val mediateCheckpoint = StubCheckpoint("some-checkpoint")
-    traceDispatcher.dispatchMediate(trace, mediateCheckpoint)
+    traceDispatcher.dispatchEnrichment(trace, mediateCheckpoint)
 
     When("start mediated trace") {
         traceDispatcher.dispatchStart(trace, startCheckpoint)
@@ -219,7 +219,7 @@ private suspend fun BehaviorSpecGivenContainerScope.runTestsForMediatedTrace(
 
     When("mediate a trace again") {
         val anotherMediateCheckpoint = StubCheckpoint("another-mediate-checkpoint")
-        traceDispatcher.dispatchMediate(trace, anotherMediateCheckpoint)
+        traceDispatcher.dispatchEnrichment(trace, anotherMediateCheckpoint)
 
         Then("trace state stays unchanged; change not dispatched; checkpoint is added") {
             trace.state shouldBe Trace.State.STARTED

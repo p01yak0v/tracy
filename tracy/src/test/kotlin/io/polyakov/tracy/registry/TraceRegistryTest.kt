@@ -36,12 +36,28 @@ class TraceRegistryTest : BehaviorSpec({
                     removedTrace shouldBeSameInstanceAs trace
                 }
 
+                And("Get removed trace") {
+                    val getRemovedTrace = traceRegistry.getTrace(descriptor)
+
+                    Then("Trace is removed completely") {
+                        getRemovedTrace.shouldBeNull()
+                    }
+                }
+
                 And("Remove it again") {
                     val oneMoreRemovedTrace = traceRegistry.removeTrace(descriptor)
 
                     Then("Nothing to remove") {
                         oneMoreRemovedTrace.shouldBeNull()
                     }
+                }
+            }
+
+            And("Get this trace") {
+                val newTrace = traceRegistry.getTrace(descriptor)
+
+                Then("Original trace and newTrace are the same") {
+                    trace shouldBeSameInstanceAs newTrace
                 }
             }
         }
@@ -51,6 +67,14 @@ class TraceRegistryTest : BehaviorSpec({
 
             Then("No trace is removed") {
                 removedTrace.shouldBeNull()
+            }
+        }
+
+        When("Get non existent trace") {
+            val nonExistentTrace = traceRegistry.getTrace(descriptor)
+
+            Then("Trace is null") {
+                nonExistentTrace.shouldBeNull()
             }
         }
     }
