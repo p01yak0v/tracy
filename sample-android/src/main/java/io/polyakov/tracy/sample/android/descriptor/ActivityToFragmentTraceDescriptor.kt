@@ -7,12 +7,13 @@ import io.polyakov.tracy.android.matcher.activityState
 import io.polyakov.tracy.android.matcher.fragmentState
 import io.polyakov.tracy.descriptor.TraceDescriptor
 import io.polyakov.tracy.matcher.delegate.classMatcher
-import io.polyakov.tracy.sample.android.MainActivity
-import io.polyakov.tracy.sample.android.fragment.SampleFragment
+import io.polyakov.tracy.sample.android.fragment.FirstFragment
+import io.polyakov.tracy.sample.android.main.MainActivity
 
 class ActivityToFragmentTraceDescriptor : TraceDescriptor {
-    override val name: String = "main-activity-to-sample-fragment-destroyed"
+    override val name = "main-activity-to-first-fragment-resumed"
+
     override val startMatcher by activityState<MainActivity>(ActivityState.STARTED)
-    override val stopMatcher by fragmentState<SampleFragment>(FragmentState.DESTROYED)
+    override val stopMatcher by fragmentState<FirstFragment>(FragmentState.RESUMED)
     override val cancelMatcher by classMatcher<BackgroundCheckpoint>()
 }

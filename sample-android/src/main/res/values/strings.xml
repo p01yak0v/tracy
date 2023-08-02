@@ -2,4 +2,7 @@
     <string name="app_name">Tracy Sample App</string>
     <string name="press_me">Press Me!</string>
     <string name="not_really_main_string">It\'s not really the Main Screen…</string>
+    <string name="first_screen_title">First Screen</string>
+    <string name="second_screen_title">Second Screen</string>
+    <string name="third_screen_title">Third Screen</string>
 </resources>
