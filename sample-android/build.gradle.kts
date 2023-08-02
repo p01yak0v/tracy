@@ -19,5 +19,8 @@ dependencies {
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintLayout)
+    implementation(libs.androidx.splash)
     implementation(libs.firebase.performance)
+    implementation(libs.google.material)
+    implementation(libs.kotlin.reflect)
 }

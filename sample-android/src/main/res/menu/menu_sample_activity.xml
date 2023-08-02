@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/first_screen"
+          android:title="@string/first_screen_title"
+          android:icon="@drawable/icon_info" />
+    <item android:id="@+id/second_screen"
+          android:title="@string/second_screen_title"
+          android:icon="@drawable/icon_info" />
+    <item android:id="@+id/third_screen"
+          android:title="@string/third_screen_title"
+          android:icon="@drawable/icon_info" />
+</menu>

@@ -4,14 +4,13 @@ import io.polyakov.tracy.android.checkpoint.ActivityCheckpoint.ActivityState
 import io.polyakov.tracy.android.matcher.activityState
 import io.polyakov.tracy.descriptor.TraceDescriptor
 import io.polyakov.tracy.matcher.delegate.none
-import io.polyakov.tracy.sample.android.MainActivity
-import io.polyakov.tracy.sample.android.fragment.SampleFragmentsActivity
+import io.polyakov.tracy.sample.android.fragment.FragmentHostActivity
+import io.polyakov.tracy.sample.android.main.MainActivity
 
-class CrossActivityTraceDescriptor : TraceDescriptor {
+class MainToFragmentHostTraceDescriptor : TraceDescriptor {
+    override val name = "main-activity-to-fragment-host-activity"
+
     override val startMatcher by activityState<MainActivity>(ActivityState.CREATED)
-    override val stopMatcher by activityState<SampleFragmentsActivity>(ActivityState.RESUMED)
+    override val stopMatcher by activityState<FragmentHostActivity>(ActivityState.RESUMED)
     override val cancelMatcher by none()
-
-    override val name: String
-        get() = "main-create-to-not-really-main-resumed"
 }

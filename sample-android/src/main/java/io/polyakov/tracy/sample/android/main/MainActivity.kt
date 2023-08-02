@@ -1,4 +1,4 @@
-package io.polyakov.tracy.sample.android
+package io.polyakov.tracy.sample.android.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import io.polyakov.sample.common.checkpoint.StartCheckpoint
 import io.polyakov.sample.common.checkpoint.StopCheckpoint
 import io.polyakov.tracy.Tracy
-import io.polyakov.tracy.sample.android.fragment.SampleFragmentsActivity
+import io.polyakov.tracy.sample.android.R
+import io.polyakov.tracy.sample.android.fragment.FragmentHostActivity
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -21,8 +22,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         val newScreenButton = findViewById<Button>(R.id.press_me_button)
         newScreenButton.setOnClickListener {
+            Tracy.pass(PressMeCheckpoint)
             startActivity(
-                Intent(this, SampleFragmentsActivity::class.java)
+                Intent(this, FragmentHostActivity::class.java)
             )
         }
     }

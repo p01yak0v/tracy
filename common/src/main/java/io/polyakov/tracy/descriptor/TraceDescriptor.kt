@@ -7,11 +7,11 @@ import io.polyakov.tracy.matcher.CheckpointMatcher
 import kotlin.reflect.KClass
 
 interface TraceDescriptor {
+    val name: String
+
     val startMatcher: CheckpointMatcher
     val stopMatcher: CheckpointMatcher
     val cancelMatcher: CheckpointMatcher
-
-    val name: String
 
     val attributeExtractor: AttributeExtractor
         get() = EmptyAttributeExtractor()
