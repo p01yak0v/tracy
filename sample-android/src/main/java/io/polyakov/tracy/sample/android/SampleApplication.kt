@@ -5,6 +5,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.perf.ktx.performance
 import io.polyakov.sample.common.descriptor.SampleDescriptorProvider
 import io.polyakov.tracy.Tracy
+import io.polyakov.tracy.android.destintation.SystemTraceDestination
 import io.polyakov.tracy.android.enableActivityCheckpoints
 import io.polyakov.tracy.android.enableForegroundCheckpoints
 import io.polyakov.tracy.android.firebase.FirebaseDestination
@@ -25,6 +26,7 @@ class SampleApplication : Application() {
                 SampleDescriptorProvider()
             ),
             listOf(
+                SystemTraceDestination(),
                 LoggingDestination(LOGGING_TAG),
                 FirebaseDestination(Firebase.performance)
             )

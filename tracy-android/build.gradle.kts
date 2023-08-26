@@ -11,4 +11,5 @@ dependencies {
 
     implementation(libs.androidx.fragment)
     implementation(libs.androidx.lifecycle.process)
+    implementation(libs.androidx.tracing)
 }
