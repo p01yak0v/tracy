@@ -11,3 +11,5 @@ interface Trace {
 
     enum class State { CREATED, STARTED, CANCELLED, STOPPED }
 }
+
+val Trace.name get() = descriptor.name
