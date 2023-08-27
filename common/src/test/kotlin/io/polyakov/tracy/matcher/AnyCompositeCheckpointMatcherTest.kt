@@ -6,17 +6,15 @@ import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.polyakov.tracy.model.TestCheckpoint
 
-class AllCompositeCheckpointMatcherTest : BehaviorSpec({
-    Given("AllCompositeCheckpointMatcher with by name and by class matcher") {
+class AnyCompositeCheckpointMatcherTest : BehaviorSpec({
+    Given("AnyCompositeCheckpointMatcher with two matchers for different names") {
         val checkpointName = "test-name"
-        val originalCheckpoint = TestCheckpoint(checkpointName)
-        val matcher = AllCompositeCheckpointMatcher(
+        val matcher = AnyCompositeCheckpointMatcher(
             NameCheckpointMatcher(checkpointName),
-            CheckpointMatcher { it is TestCheckpoint }, // by class matcher
-            CheckpointMatcher { it === originalCheckpoint } // by reference matcher
+            NameCheckpointMatcher("non-relevant-name")
         )
-        When("the same checkpoint is arrived") {
-            val result = matcher.matches(originalCheckpoint)
+        When("checkpoint with valid name is arrived") {
+            val result = matcher.matches(TestCheckpoint(checkpointName))
 
             Then("checkpoint matches") {
                 result.shouldBeTrue()
@@ -24,18 +22,17 @@ class AllCompositeCheckpointMatcherTest : BehaviorSpec({
         }
 
         When("another checkpoint is arrived") {
-            val result = matcher.matches(TestCheckpoint(checkpointName))
+            val result = matcher.matches(TestCheckpoint("completely-different-name"))
 
             Then("checkpoint doesn't match") {
                 result.shouldBeFalse()
             }
         }
     }
-
-    Given("AllCompositeCheckpointMatcher has no matchers") {
+    Given("AnyCompositeCheckpointMatcher has no matchers") {
         Then("instantiation failed with exception") {
             shouldThrow<IllegalArgumentException> {
-                AllCompositeCheckpointMatcher()
+                AnyCompositeCheckpointMatcher()
             }
         }
     }
