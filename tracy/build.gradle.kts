@@ -4,4 +4,6 @@ plugins {
 
 dependencies {
     api(project(":common"))
+
+    testImplementation(testFixtures(project(":common")))
 }

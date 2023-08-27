@@ -6,7 +6,6 @@ import io.kotest.data.row
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.collections.shouldContainOnly
 import io.kotest.matchers.shouldBe
-import io.polyakov.tracy.model.stub.StubCheckpoint
 import io.polyakov.tracy.model.stub.StubTraceDescriptor
 
 class OperationalTraceTest : BehaviorSpec({
@@ -17,7 +16,7 @@ class OperationalTraceTest : BehaviorSpec({
         }
 
         When("start a trace") {
-            val startCheckpoint = StubCheckpoint("start")
+            val startCheckpoint = TestCheckpoint("start")
             trace.start(startCheckpoint)
 
             Then("trace is in ${Trace.State.STARTED} state and contains a single checkpoint") {
@@ -26,7 +25,7 @@ class OperationalTraceTest : BehaviorSpec({
             }
 
             And("stop a trace") {
-                val stopCheckpoint = StubCheckpoint("stop")
+                val stopCheckpoint = TestCheckpoint("stop")
                 trace.stop(stopCheckpoint)
 
                 Then("trace state is ${Trace.State.STOPPED}; checkpoints updated; duration calculated") {
@@ -37,7 +36,7 @@ class OperationalTraceTest : BehaviorSpec({
                 }
 
                 And("cancel a trace") {
-                    val cancelResult = trace.cancel(StubCheckpoint("cancel"))
+                    val cancelResult = trace.cancel(TestCheckpoint("cancel"))
 
                     Then("cancel is not occurred") {
                         cancelResult shouldBe false
@@ -46,7 +45,7 @@ class OperationalTraceTest : BehaviorSpec({
             }
 
             And("cancel a trace") {
-                val cancelCheckpoint = StubCheckpoint("cancel")
+                val cancelCheckpoint = TestCheckpoint("cancel")
                 trace.cancel(cancelCheckpoint)
 
                 Then("trace state is ${Trace.State.CANCELLED}; checkpoints updated; duration calculated") {
@@ -58,7 +57,7 @@ class OperationalTraceTest : BehaviorSpec({
                 }
 
                 And("stop a trace") {
-                    val stopResult = trace.stop(StubCheckpoint("stop"))
+                    val stopResult = trace.stop(TestCheckpoint("stop"))
 
                     Then("trace is not stopped") {
                         stopResult shouldBe false
@@ -73,7 +72,7 @@ class OperationalTraceTest : BehaviorSpec({
             row("cancel", OperationalTrace::cancel)
         ) { label: String, operation: OperationalTrace.(Checkpoint) -> Boolean ->
             When("$label a trace") {
-                val operationResult = trace.operation(StubCheckpoint(label))
+                val operationResult = trace.operation(TestCheckpoint(label))
 
                 Then("$label operation is not executed") {
                     operationResult shouldBe false

@@ -11,9 +11,9 @@ import io.kotest.matchers.shouldBe
 import io.polyakov.tracy.dispatcher.stub.AccumulatorTraceStateDelegate
 import io.polyakov.tracy.model.Checkpoint
 import io.polyakov.tracy.model.OperationalTrace
+import io.polyakov.tracy.model.TestCheckpoint
 import io.polyakov.tracy.model.Trace
 import io.polyakov.tracy.model.TraceImpl
-import io.polyakov.tracy.model.stub.StubCheckpoint
 import io.polyakov.tracy.model.stub.StubTraceDescriptor
 
 class TraceDispatcherTest : BehaviorSpec({
@@ -58,7 +58,7 @@ private suspend fun BehaviorSpecGivenContainerScope.runTestsForCreatedTrace(
     traceStateDelegate: AccumulatorTraceStateDelegate
 ) {
     val trace = TraceImpl.create(StubTraceDescriptor())
-    val checkpoint = StubCheckpoint("some-checkpoint")
+    val checkpoint = TestCheckpoint("some-checkpoint")
 
     When("start trace using dispatcher") {
         traceDispatcher.dispatchStart(trace, checkpoint)
@@ -90,8 +90,8 @@ private suspend fun BehaviorSpecGivenContainerScope.runTestsForStartedTrace(
     traceStateDelegate: AccumulatorTraceStateDelegate
 ) {
     val trace = TraceImpl.create(StubTraceDescriptor())
-    val checkpoint = StubCheckpoint("some-checkpoint")
-    traceDispatcher.dispatchStart(trace, StubCheckpoint("start"))
+    val checkpoint = TestCheckpoint("some-checkpoint")
+    traceDispatcher.dispatchStart(trace, TestCheckpoint("start"))
 
     When("start already started trace") {
         traceDispatcher.dispatchStart(trace, checkpoint)
@@ -140,12 +140,12 @@ private suspend fun BehaviorSpecGivenContainerScope.runTestsForTerminatedTrace(
     expectedState: Trace.State
 ) {
     val trace = TraceImpl.create(StubTraceDescriptor())
-    val checkpoint = StubCheckpoint("some-checkpoint")
+    val checkpoint = TestCheckpoint("some-checkpoint")
 
-    val startCheckpoint = StubCheckpoint("start")
+    val startCheckpoint = TestCheckpoint("start")
     traceDispatcher.dispatchStart(trace, startCheckpoint)
 
-    val stopCheckpoint = StubCheckpoint(expectedState.name)
+    val stopCheckpoint = TestCheckpoint(expectedState.name)
     traceDispatcher.initialOperation(trace, stopCheckpoint)
 
     forAll(
@@ -178,10 +178,10 @@ private suspend fun BehaviorSpecGivenContainerScope.runTestsForMediatedTrace(
 ) {
     val trace = TraceImpl.create(StubTraceDescriptor())
 
-    val startCheckpoint = StubCheckpoint("start")
+    val startCheckpoint = TestCheckpoint("start")
     traceDispatcher.dispatchStart(trace, startCheckpoint)
 
-    val mediateCheckpoint = StubCheckpoint("some-checkpoint")
+    val mediateCheckpoint = TestCheckpoint("some-checkpoint")
     traceDispatcher.dispatchEnrichment(trace, mediateCheckpoint)
 
     When("start mediated trace") {
@@ -199,7 +199,7 @@ private suspend fun BehaviorSpecGivenContainerScope.runTestsForMediatedTrace(
         row("cancel", TraceDispatcher::dispatchCancel, Trace.State.CANCELLED),
     ) { label: String, operation: TraceDispatcher.(OperationalTrace, Checkpoint) -> Unit, newState: Trace.State ->
         When("$label a trace") {
-            val finalCheckpoint = StubCheckpoint(label)
+            val finalCheckpoint = TestCheckpoint(label)
             traceDispatcher.operation(trace, finalCheckpoint)
 
             Then("trace is in $newState state; change dispatched") {
@@ -218,7 +218,7 @@ private suspend fun BehaviorSpecGivenContainerScope.runTestsForMediatedTrace(
     }
 
     When("mediate a trace again") {
-        val anotherMediateCheckpoint = StubCheckpoint("another-mediate-checkpoint")
+        val anotherMediateCheckpoint = TestCheckpoint("another-mediate-checkpoint")
         traceDispatcher.dispatchEnrichment(trace, anotherMediateCheckpoint)
 
         Then("trace state stays unchanged; change not dispatched; checkpoint is added") {

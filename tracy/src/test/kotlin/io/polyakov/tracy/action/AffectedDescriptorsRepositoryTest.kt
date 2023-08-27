@@ -6,7 +6,8 @@ import io.kotest.data.row
 import io.kotest.matchers.collections.shouldContainExactly
 import io.polyakov.tracy.descriptor.TraceDescriptor
 import io.polyakov.tracy.descriptor.TraceDescriptorProvider
-import io.polyakov.tracy.model.stub.StubCheckpoint
+import io.polyakov.tracy.matcher.NameCheckpointMatcher
+import io.polyakov.tracy.model.TestCheckpoint
 
 class AffectedDescriptorsRepositoryTest : BehaviorSpec({
     Given("instance of affected descriptors repository") {
@@ -33,7 +34,7 @@ class AffectedDescriptorsRepositoryTest : BehaviorSpec({
         ) { label, checkpointName, targetDescriptor, targetAction ->
             When("$label checkpoint for ${targetDescriptor.name} is arrived") {
                 val affectedTraces = affectedDescriptorsRepository.getAffectedTraces(
-                    StubCheckpoint(checkpointName)
+                    TestCheckpoint(checkpointName)
                 )
                 Then("single trace affected only") {
                     affectedTraces.shouldContainExactly(
@@ -62,14 +63,14 @@ class AffectedDescriptorsRepositoryTest : BehaviorSpec({
                 firstTraceDescriptor.cancelCheckpointName,
                 TraceAction.CANCEL
             ),
-        ) { label: String, matcher: DynamicTraceDescriptor.() -> DynamicNameCheckpointMatcher,
+        ) { label: String, matcher: DynamicTraceDescriptor.() -> NameCheckpointMatcher,
                 firstCheckpointName: String, action: TraceAction ->
             And("second trace has the same $label checkpoint as the first one") {
                 secondTraceDescriptor.matcher().checkpointName = firstCheckpointName
 
                 When("$label checkpoint associated with two descriptors is arrived") {
                     val affectedTraces = affectedDescriptorsRepository.getAffectedTraces(
-                        StubCheckpoint(firstCheckpointName)
+                        TestCheckpoint(firstCheckpointName)
                     )
 
                     Then("both descriptors are affected") {

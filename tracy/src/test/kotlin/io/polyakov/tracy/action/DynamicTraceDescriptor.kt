@@ -1,5 +1,6 @@
 package io.polyakov.tracy.action
 
+import io.polyakov.tracy.matcher.NameCheckpointMatcher
 import io.polyakov.tracy.model.stub.StubTraceDescriptor
 
 internal class DynamicTraceDescriptor(name: String) : StubTraceDescriptor(name) {
@@ -14,7 +15,7 @@ internal class DynamicTraceDescriptor(name: String) : StubTraceDescriptor(name) 
     val stopCheckpointName = "$name-$STOP_CHECKPOINT_NAME"
     val cancelCheckpointName = "$name-$CANCEL_CHECKPOINT_NAME"
 
-    override val startMatcher = DynamicNameCheckpointMatcher(startCheckpointName)
-    override val stopMatcher = DynamicNameCheckpointMatcher(stopCheckpointName)
-    override val cancelMatcher = DynamicNameCheckpointMatcher(cancelCheckpointName)
+    override val startMatcher = NameCheckpointMatcher(startCheckpointName)
+    override val stopMatcher = NameCheckpointMatcher(stopCheckpointName)
+    override val cancelMatcher = NameCheckpointMatcher(cancelCheckpointName)
 }
