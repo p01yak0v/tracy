@@ -28,13 +28,15 @@ internal class DestinationTraceStateDelegate(
     }
 
     private fun processTraceStop(trace: Trace) {
+        val attributes = trace.checkpoints
+            .flatMap(trace.descriptor.attributeExtractor::extract)
+
         destinations.forEach {
             if (isDestinationExcluded(trace, it)) {
                 return@forEach
             }
 
-            fillAttributes(trace, it)
-
+            it.fillAttributes(trace, attributes)
             it.stop(trace)
         }
     }
@@ -51,12 +53,5 @@ internal class DestinationTraceStateDelegate(
 
     private fun isDestinationExcluded(trace: Trace, destination: TraceDestination): Boolean {
         return trace.descriptor.excludedDestinations.contains(destination::class)
-    }
-
-    private fun fillAttributes(trace: Trace, destination: TraceDestination) {
-        val attributes = trace.checkpoints
-            .flatMap(trace.descriptor.attributeExtractor::extract)
-
-        destination.fillAttributes(trace, attributes)
     }
 }
