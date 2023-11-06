@@ -6,6 +6,7 @@ import io.polyakov.tracy.sample.android.descriptor.ActivityToFragmentTraceDescri
 import io.polyakov.tracy.sample.android.descriptor.FirstFragmentToSecondFragmentTraceDescriptor
 import io.polyakov.tracy.sample.android.descriptor.MainToFragmentHostTraceDescriptor
 import io.polyakov.tracy.sample.android.descriptor.PressMeToThirdFragmentTraceDescriptor
+import io.polyakov.tracy.sample.android.descriptor.SplashRenderingTrace
 
 class SampleAndroidDescriptorProvider(
     private val decorated: TraceDescriptorProvider
@@ -13,6 +14,7 @@ class SampleAndroidDescriptorProvider(
 
     override fun provide(): Set<TraceDescriptor> {
         return mutableSetOf(
+            SplashRenderingTrace(),
             MainToFragmentHostTraceDescriptor(),
             ActivityToFragmentTraceDescriptor(),
             PressMeToThirdFragmentTraceDescriptor(),
