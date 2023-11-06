@@ -5,7 +5,7 @@ import io.polyakov.tracy.model.Trace
 import io.polyakov.tracy.model.Trace.State
 
 internal class DestinationTraceStateDelegate(
-    private val destinations: List<TraceDestination>
+    private val destinations: Set<TraceDestination>
 ) : TraceStateDelegate {
 
     override fun onTraceStateChanged(trace: Trace, state: State) {
