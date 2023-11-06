@@ -29,4 +29,4 @@ jobs:
         uses: gradle/gradle-build-action@v2.4.2
         with:
           # exclude all samples because there is no any tests there
-          arguments: "test -x sample-android:test -x sample-common:test -x sample-jvm:test"
+          arguments: "test -x sample-common:test -x sample-jvm:test"
