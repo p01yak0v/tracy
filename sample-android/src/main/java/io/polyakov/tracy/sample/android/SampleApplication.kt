@@ -39,7 +39,7 @@ open class SampleApplication : Application() {
         )
     }
 
-    open protected fun provideDestinationSet(): Set<TraceDestination> = setOf(
+    protected open fun provideDestinationSet(): Set<TraceDestination> = setOf(
         SystemTraceDestination(),
         LoggingDestination(LOGGING_TAG),
         FirebaseDestination(Firebase.performance)

@@ -24,9 +24,6 @@ android {
         unitTests.all {
             it.useJUnitPlatform()
         }
+        unitTests.includeAndroidResources  = true
     }
-}
-
-dependencies {
-    testImplementation libs.test.kotest
 }
