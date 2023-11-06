@@ -10,10 +10,11 @@ import io.polyakov.tracy.android.enableActivityCheckpoints
 import io.polyakov.tracy.android.enableForegroundCheckpoints
 import io.polyakov.tracy.android.firebase.FirebaseDestination
 import io.polyakov.tracy.destination.LoggingDestination
+import io.polyakov.tracy.destination.TraceDestination
 
 private const val LOGGING_TAG = "LoggingAndroid"
 
-class SampleApplication : Application() {
+open class SampleApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -21,20 +22,26 @@ class SampleApplication : Application() {
     }
 
     private fun setupTracy() = with(Tracy) {
-        init(
-            SampleAndroidDescriptorProvider(
-                SampleDescriptorProvider()
-            ),
-            listOf(
-                SystemTraceDestination(),
-                LoggingDestination(LOGGING_TAG),
-                FirebaseDestination(Firebase.performance)
-            )
-        )
+        init {
+            traceProvider {
+                SampleAndroidDescriptorProvider(
+                    SampleDescriptorProvider()
+                )
+            }
+            destinations {
+                provideDestinationSet()
+            }
+        }
         enableForegroundCheckpoints()
         enableActivityCheckpoints(
             application = this@SampleApplication,
             includeFragmentsCheckpoint = true
         )
     }
+
+    open protected fun provideDestinationSet(): Set<TraceDestination> = setOf(
+        SystemTraceDestination(),
+        LoggingDestination(LOGGING_TAG),
+        FirebaseDestination(Firebase.performance)
+    )
 }

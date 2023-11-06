@@ -17,7 +17,7 @@ internal class DestinationTraceStateDelegateTest : BehaviorSpec({
         val includedDestination = StubTraceDestination()
         val excludedDestination = YetAnotherStubTraceDestination()
         val destinationTraceStateDelegate = DestinationTraceStateDelegate(
-            listOf(includedDestination, excludedDestination)
+            setOf(includedDestination, excludedDestination)
         )
 
         And("trace with one excluded destination") {

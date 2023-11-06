@@ -9,13 +9,15 @@ import io.polyakov.tracy.destination.LoggingDestination
 private const val SAMPLE_SLEEP_INTERVAL_IN_MS = 1000L
 
 fun main(args: Array<String>) {
-    Tracy.init(
-        SampleDescriptorProvider(),
-        listOf(
-            LoggingDestination("LoggingJvm#1"),
-            LoggingDestination("LoggingJvm#2")
-        )
-    )
+    Tracy.init {
+        traceProvider { SampleDescriptorProvider() }
+        destinations {
+            setOf(
+                LoggingDestination("LoggingJvm#1"),
+                LoggingDestination("LoggingJvm#2")
+            )
+        }
+    }
 
     Tracy.pass(StartCheckpoint)
 

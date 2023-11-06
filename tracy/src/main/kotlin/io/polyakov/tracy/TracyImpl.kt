@@ -13,7 +13,19 @@ internal class TracyImpl(
     private val traceDispatcher: TraceDispatcher
 ) : Tracy {
 
+    private val checkpointListeners = mutableSetOf<CheckpointListener>()
+
+    override fun addCheckpointListener(checkpointListener: CheckpointListener) {
+        checkpointListeners += checkpointListener
+    }
+
+    override fun removeCheckpointListener(checkpointListener: CheckpointListener) {
+        checkpointListeners -= checkpointListener
+    }
+
     override fun pass(checkpoint: Checkpoint) {
+        checkpointListeners.forEach { it.onCheckpoint(checkpoint) }
+
         val affectedTraces = affectedDescriptorsRepository.getAffectedTraces(checkpoint)
         for (trace in affectedTraces) {
             val (descriptor, action) = trace
